@@ -3,7 +3,11 @@ FROM amazonlinux:2
 ENV user ec2-user
 ENV group ec2-user
 
-RUN yum install -y python3 python3-pip
-RUN pip3 install ansible==2.6
+RUN set -x \
+  && yum install -y python2-pip python2-devel python2-virtualenv \
+  && pip-2 install --upgrade pip \
+  && python --version \
+  && pip --version
+RUN pip install --upgrade ansible
 
 CMD ["/bin/bash"]
